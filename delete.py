@@ -83,4 +83,4 @@ async def clear_error(ctx, error):
         await ctx.send("Please provide a valid number. Example: `!clear 5`")
 
 # SECURE RUN: Uses the token from .env
-bot.run(os.getenv('DISCORD_TOKEN'))
+bot.run(os.getenv('DISCORD_BOT_TOKEN'))
