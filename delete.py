@@ -33,14 +33,14 @@ intents.message_content = True
 
 
 # prefix '!' and intents for bot
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
 # A decorator that registers the function below as an event listener
 @bot.event
 # Defines an asynchronous function that triggers specifically when the bot has successfully connected to Discord
 async def on_ready():
     # Login confirmation message
-    print(f'✅  {bot.user.name} on Duty')
+    print(f'✅  {bot.user.name} on Duty to delete messages')
 
 # A decorator that registers the function below as an accessible command via the command prefix
 @bot.command()
