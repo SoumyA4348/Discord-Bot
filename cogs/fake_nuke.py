@@ -10,11 +10,9 @@ class FakeNuke(commands.Cog):
 
     @commands.command(name="nuke")
     @commands.guild_only()
+    @commands.is_owner()
     async def nuke(self, ctx: commands.Context) -> None:
         """Runs a simulated server nuke sequence (restricted to bot owner)."""
-        if not await self.bot.is_owner(ctx.author):
-            return  # Fail silently as if the command doesn't exist
-
         # Phase 1: Warning Embed
         embed = discord.Embed(
             title="⚠️ CRITICAL SYSTEM ALERT ⚠️",
@@ -110,6 +108,11 @@ class FakeNuke(commands.Cog):
         )
         final_embed.set_footer(text="Nuke Simulation Complete.")
         await message.edit(embed=final_embed)
+
+    @nuke.error
+    async def nuke_error(self, ctx: commands.Context, error: Exception) -> None:
+        if isinstance(error, commands.NotOwner):
+            return  # Fail silently if not owner
 
 async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(FakeNuke(bot))

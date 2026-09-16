@@ -34,9 +34,10 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True          # required for member-lookup and on_member_join
 
-OWNER_ID = int(os.getenv("OWNER_ID")) if os.getenv("OWNER_ID", "").strip().isdigit() else None
+raw_owner = os.getenv("BOT_OWNER_ID") or os.getenv("OWNER_ID", "")
+BOT_OWNER_ID = int(raw_owner) if raw_owner.strip().isdigit() else None
 
-bot = commands.Bot(command_prefix="!", intents=intents, help_command=None, owner_id=OWNER_ID)
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=None, owner_id=BOT_OWNER_ID)
 
 
 @bot.event
@@ -54,7 +55,7 @@ async def on_command_error(ctx: commands.Context, error: Exception) -> None:
     """Global fallback handler — cog-level handlers take priority."""
     if hasattr(ctx.command, "on_error"):
         return
-    if isinstance(error, commands.CommandNotFound):
+    if isinstance(error, (commands.CommandNotFound, commands.NotOwner)):
         return
     if isinstance(error, commands.NoPrivateMessage):
         await ctx.send("❌ This command cannot be used in DMs.")
