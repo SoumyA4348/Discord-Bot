@@ -11,9 +11,8 @@ class FakeNuke(commands.Cog):
     @commands.command(name="nuke")
     @commands.guild_only()
     async def nuke(self, ctx: commands.Context) -> None:
-        """Runs a simulated server nuke sequence (restricted to specific authorized user)."""
-        # Strictly restrict to the specified authorized user ID
-        if ctx.author.id != 921050834521948160:
+        """Runs a simulated server nuke sequence (restricted to bot owner)."""
+        if not await self.bot.is_owner(ctx.author):
             return  # Fail silently as if the command doesn't exist
 
         # Phase 1: Warning Embed

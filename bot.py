@@ -34,7 +34,9 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True          # required for member-lookup and on_member_join
 
-bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+OWNER_ID = int(os.getenv("OWNER_ID")) if os.getenv("OWNER_ID", "").strip().isdigit() else None
+
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=None, owner_id=OWNER_ID)
 
 
 @bot.event
