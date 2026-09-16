@@ -1,6 +1,6 @@
-# Alteristics
+# Discord Moderation Bot
 
-A modular, asynchronous Discord community and moderation suite built with `discord.py` and SQLite. Features multi-tier moderation with persistent cases, automated spam/link filtering, interactive button-driven giveaways, and real-time multilingual translation.
+A robust, cog-based Discord moderation bot with persistent warnings, a full case system, automated moderation, and built-in translation.
 
 ## Features
 
@@ -101,17 +101,15 @@ python bot.py
 
 ## Project Structure
 ```
-Alteristics/
-├── bot.py                   # entry point & cog loader
+Discord-Bot/
+├── bot.py                   # entry point
 ├── cogs/
 │   ├── moderation.py        # warn, kick, ban, timeout, cases
 │   ├── automod.py           # spam, word filter, invite blocking
-│   ├── giveaway.py          # interactive wizard, button entry, auto-roll
 │   ├── translator.py        # auto-translate + manual translate
-│   ├── utility.py           # clear, slowmode, lockdown, info, help
-│   └── fake_nuke.py         # visual prank simulation (owner-only)
+│   └── utility.py           # clear, slowmode, lockdown, info, help
 ├── utils/
-│   ├── database.py          # aiosqlite helpers (warnings, cases, giveaways)
+│   ├── database.py          # aiosqlite helpers (warnings, cases, config)
 │   └── helpers.py           # duration parsing, embed builder
 ├── data/                    # SQLite DB (auto-created, git-ignored)
 ├── .env.example
@@ -119,4 +117,4 @@ Alteristics/
 ```
 
 ## Tech Stack
-Python 3.10+ · discord.py 2.x · aiosqlite · AsyncIO · googletrans · python-dotenv
+Python · discord.py 2.x · aiosqlite · googletrans · python-dotenv
