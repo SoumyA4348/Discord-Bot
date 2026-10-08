@@ -1,4 +1,5 @@
 # Discord Moderation Bot
+Alteristics
 
 A robust, cog-based Discord moderation bot with persistent warnings, a full case system, automated moderation, and built-in translation.
 
