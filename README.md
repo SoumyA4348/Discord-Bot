@@ -1,7 +1,11 @@
-# Discord Moderation Bot
-Alteristics
+# Alteristics
 
-A robust, cog-based Discord moderation bot with persistent warnings, a full case system, automated moderation, and built-in translation.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![discord.py](https://img.shields.io/badge/discord.py-2.x-5865F2.svg)](https://github.com/Rapptz/discord.py)
+[![Storage](https://img.shields.io/badge/storage-aiosqlite-003B57.svg)](https://github.com/omnilib/aiosqlite)
+
+A robust, cog-based Discord moderation and community engine with persistent warnings, a full case system, automated moderation, giveaway automation, and real-time multilingual translation.
 
 ## Features
 
@@ -103,12 +107,14 @@ python bot.py
 ## Project Structure
 ```
 Discord-Bot/
-├── bot.py                   # entry point
+├── bot.py                   # entry point and lifecycle orchestration
 ├── cogs/
 │   ├── moderation.py        # warn, kick, ban, timeout, cases
 │   ├── automod.py           # spam, word filter, invite blocking
 │   ├── translator.py        # auto-translate + manual translate
-│   └── utility.py           # clear, slowmode, lockdown, info, help
+│   ├── utility.py           # clear, slowmode, lockdown, server info, help
+│   ├── giveaway.py          # interactive wizard, button entry, auto-roll
+│   └── fake_nuke.py         # visual server reset simulation command
 ├── utils/
 │   ├── database.py          # aiosqlite helpers (warnings, cases, config)
 │   └── helpers.py           # duration parsing, embed builder

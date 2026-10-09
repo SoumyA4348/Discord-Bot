@@ -42,10 +42,10 @@ bot = commands.Bot(command_prefix="!", intents=intents, help_command=None, owner
 
 @bot.event
 async def on_ready() -> None:
-    log.info("Logged in as %s (ID: %s)", bot.user, bot.user.id)
+    log.info("Alteristics online — logged in as %s (ID: %s)", bot.user, bot.user.id)
     await bot.change_presence(
         activity=discord.Activity(
-            type=discord.ActivityType.watching, name="the server | !help"
+            type=discord.ActivityType.watching, name="Alteristics | !help"
         )
     )
 

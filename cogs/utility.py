@@ -212,7 +212,7 @@ class Utility(commands.Cog):
     async def help_command(self, ctx: commands.Context) -> None:
         """Show all available commands grouped by category."""
         embed = discord.Embed(
-            title="📖 Command Reference",
+            title="📖 Alteristics — Command Reference",
             description="Prefix: `!`  —  Use `!help` anytime to see this.",
             color=discord.Color.blurple(),
         )
