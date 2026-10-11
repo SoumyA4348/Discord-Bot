@@ -1,3 +1,4 @@
+import time
 import discord
 from discord.ext import commands
 
@@ -206,6 +207,26 @@ class Utility(commands.Cog):
         )
         await ctx.send(embed=embed)
 
+    # ── Ping ──────────────────────────────────────────────────────────────────
+
+    @commands.command()
+    async def ping(self, ctx: commands.Context) -> None:
+        """Measure bot WebSocket latency and API round-trip response time."""
+        start = time.perf_counter()
+        msg = await ctx.send("🏓 Pinging...")
+        end = time.perf_counter()
+
+        api_latency = round((end - start) * 1000)
+        ws_latency = round(self.bot.latency * 1000)
+
+        embed = discord.Embed(
+            title="🏓 Pong!",
+            color=discord.Color.green(),
+        )
+        embed.add_field(name="API Round-Trip", value=f"`{api_latency} ms`", inline=True)
+        embed.add_field(name="WebSocket Heartbeat", value=f"`{ws_latency} ms`", inline=True)
+        await msg.edit(content=None, embed=embed)
+
     # ── Help ──────────────────────────────────────────────────────────────────
 
     @commands.command(name="help")
@@ -251,6 +272,7 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🔧 Utility",
             value=(
+                "`!ping` — check WebSocket heartbeat & API latency\n"
                 "`!clear <n>` — bulk-delete up to 100 messages\n"
                 "`!slowmode <sec>` — set / disable slowmode (0 = off)\n"
                 "`!lockdown [reason]` — lock channel for @everyone\n"
