@@ -38,6 +38,7 @@ A robust, cog-based Discord moderation and community engine with persistent warn
 | Command | Description |
 |---|---|
 | `!ping` | Measure WebSocket heartbeat and API round-trip latency. |
+| `!uptime` | Display bot continuous uptime duration. |
 | `!clear <n>` | Bulk-delete up to 100 messages. |
 | `!slowmode <sec>` | Set channel slowmode (0 disables it). |
 | `!lockdown [reason]` | Prevent @everyone from sending in the channel. |

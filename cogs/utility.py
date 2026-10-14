@@ -10,6 +10,7 @@ class Utility(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+        self.start_time = time.time()
 
     # ── Clear ─────────────────────────────────────────────────────────────────
 
@@ -227,6 +228,34 @@ class Utility(commands.Cog):
         embed.add_field(name="WebSocket Heartbeat", value=f"`{ws_latency} ms`", inline=True)
         await msg.edit(content=None, embed=embed)
 
+    # ── Uptime ────────────────────────────────────────────────────────────────
+
+    @commands.command()
+    async def uptime(self, ctx: commands.Context) -> None:
+        """Display how long the bot has been continuously running."""
+        elapsed = int(time.time() - self.start_time)
+        days, remainder = divmod(elapsed, 86400)
+        hours, remainder = divmod(remainder, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        parts = []
+        if days > 0:
+            parts.append(f"{days}d")
+        if hours > 0:
+            parts.append(f"{hours}h")
+        if minutes > 0:
+            parts.append(f"{minutes}m")
+        parts.append(f"{seconds}s")
+        formatted = " ".join(parts)
+
+        embed = discord.Embed(
+            title="⏱️ Bot Uptime",
+            description=f"Alteristics has been online for **{formatted}**.",
+            color=discord.Color.green(),
+        )
+        embed.set_footer(text=f"Requested by {ctx.author.display_name}")
+        await ctx.send(embed=embed)
+
     # ── Help ──────────────────────────────────────────────────────────────────
 
     @commands.command(name="help")
@@ -273,6 +302,7 @@ class Utility(commands.Cog):
             name="🔧 Utility",
             value=(
                 "`!ping` — check WebSocket heartbeat & API latency\n"
+                "`!uptime` — display bot uptime duration\n"
                 "`!clear <n>` — bulk-delete up to 100 messages\n"
                 "`!slowmode <sec>` — set / disable slowmode (0 = off)\n"
                 "`!lockdown [reason]` — lock channel for @everyone\n"
